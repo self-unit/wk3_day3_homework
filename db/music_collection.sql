@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS albums
-DROP TABLE IF EXISTS artists
+DROP TABLE IF EXISTS albums;
+DROP TABLE IF EXISTS artists;
 ----------------------------
 CREATE TABLE artists (
   id SERIAL8 PRIMARY KEY,
-  name VARCHAR(255),
+  name VARCHAR(255)
 );
 
 CREATE TABLE albums (
