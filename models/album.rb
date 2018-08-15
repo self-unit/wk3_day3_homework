@@ -9,8 +9,8 @@ class Album
   def initialize(options)
     @title = options['title']
     @genre = options['genre']
-    @artist_id = options['artist_id'].to_i if options['artist_id']
-    @id = options['id'].to_i
+    @artist_id = options['artist_id'].to_i
+    @id = options['id'].to_i if options['id']
   end
 
   def save
@@ -42,7 +42,7 @@ class Album
     sql = "DELETE FROM albums
     WHERE id = $1"
     values = [@id]
-    returned_array = SqlRunner.run(sql, values)
+    SqlRunner.run(sql, values)
   end
 
   def Album.all

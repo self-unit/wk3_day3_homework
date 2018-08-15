@@ -41,7 +41,7 @@ class Artist
     sql = "DELETE FROM artists
     WHERE id = $1"
     values = [@id]
-    returned_array = SqlRunner.run(sql, values)
+    SqlRunner.run(sql, values)
   end
 
   def Artist.all
