@@ -30,15 +30,24 @@ class Artist
   end
 
   def update
+    sql = "UPDATE artists SET name
+    = $1
+    WHERE id = $2"
+    values = [@name, @id]
+    returned_array = SqlRunner.run(sql, values)
   end
 
-  def delete_by_name
+  def delete
+    sql = "DELETE FROM artists
+    WHERE id = $1"
+    values = [@id]
+    returned_array = SqlRunner.run(sql, values)
   end
 
   def Artist.all
     sql = "SELECT * FROM artists"
     returned_array = SqlRunner.run(sql)
-    return returned_array.map {|name| Artist.new(name)}
+    return returned_array.map {|artist| Artist.new(artist)}
   end
 
   def Artist.find_by_name(name)
@@ -46,7 +55,15 @@ class Artist
     WHERE name = $1"
     values = [name]
     returned_array = SqlRunner.run(sql, values)
-    returned_array.count > 0 ? returned_array.map {|name| Artist.new(name)} : nil
+    returned_array.count > 0 ? returned_array.map {|artist| Artist.new(artist)} : nil
+  end
+
+  def Artist.find_by_id(id)
+    sql = "SELECT * FROM artists
+    WHERE id = $1"
+    values = [id]
+    returned_array = SqlRunner.run(sql, values)
+    returned_array.count > 0 ? returned_array.map {|artist| Artist.new(artist)} : nil
   end
 
   def Artist.delete_all
